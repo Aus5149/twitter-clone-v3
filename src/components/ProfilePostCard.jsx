@@ -12,7 +12,7 @@ export default function ProfilePostCard({ content, postId }) {
   const userId = decode.id;
 
   const pic = "https://pbs.twimg.com/profile_images/1587405892437221376/h167Jlb2_400x400.jpg";
-  const BASE_URL = "https://70a86a3e-a4ee-474c-b947-7db19c2c8f4e-00-3njn0aszec7s6.pike.replit.dev";
+  const BASE_URL = "https://96564b64-8198-4ddd-b9b2-31b413aec3aa-00-1jt4ivbwvkmwj.pike.replit.dev";
 
   useEffect(() => {
     fetch(`${BASE_URL}/likes/post/${postId}`)
@@ -29,7 +29,10 @@ export default function ProfilePostCard({ content, postId }) {
     axios.post(`${BASE_URL}/likes`, {
       user_id: userId,
       post_id: postId,
-    })
+      
+    }, {headers: {
+  "Content-Type": "application/json",
+}})
       .then((response) => {
         setLikes([...likes, { ...response.data, likes_id: response.data.id }]);
       })
@@ -40,7 +43,7 @@ export default function ProfilePostCard({ content, postId }) {
     const like = likes.find((like) => like.user_id === userId);
     if (like) {
       axios
-        .put(`${BASE_URL}/likes/${userId}/${postId}`) // Include userId and postId in the URL
+        .delete(`${BASE_URL}/likes/${like.id}`) // Include userId and postId in the URL
         .then(() => {
           // Update the state to reflect the removal of the like
           setLikes(likes.filter((likeItem) => likeItem.user_id !== userId));
