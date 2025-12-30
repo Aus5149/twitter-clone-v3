@@ -1,9 +1,9 @@
-import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react";
+//import { jwtDecode } from "jwt-decode";
+//import { useEffect } from "react";
 import { Button, Col, Image, Nav, Row, Spinner } from "react-bootstrap";
 import ProfilePostCard from "./ProfilePostCard";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchPostByUser } from "../features/posts/postsSlice"
+import { useSelector } from "react-redux";
+//import { fetchPostByUser } from "../features/posts/postsSlice"
 
 export default function ProfileMidBody() {
  // const [posts, setPosts] = useState([]);
@@ -13,7 +13,7 @@ export default function ProfileMidBody() {
 
   const posts = useSelector(store =>  store.posts.posts)
   const loading = useSelector((store) => store.posts.loading)
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
 
   // Fetch posts based on user id
   //const fetchPosts = (userId) => {
@@ -25,14 +25,14 @@ export default function ProfileMidBody() {
 
 
  console.log(posts)
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      const userId = decodedToken.id;
-      dispatch(fetchPostByUser(userId));
-    }
-  }, [dispatch]);
+ // useEffect(() => {
+ //   const token = localStorage.getItem("authToken");
+ //   if (token) {
+ //     const decodedToken = jwtDecode(token);
+ //     const userId = decodedToken.id;
+ //     dispatch(fetchPostByUser(userId));
+ //   }
+ // }, [dispatch]);
 
 
   return (
