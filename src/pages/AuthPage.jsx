@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 //import useLocalStorage from "use-local-storage";
-import { AuthContext } from "../components/AuthProvider";
+import { AuthContext } from "../authContext";
 
 export default function AuthPage() {
   const loginImage = "https://sig1.co/img-twitter-1";
