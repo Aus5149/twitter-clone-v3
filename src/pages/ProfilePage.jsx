@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 //import useLocalStorage from "use-local-storage";
-import { AuthContext } from "../authContext";
+import { AuthContext } from "../components/AuthProvider";
 import ProfileSideBar from "../components/ProfileSideBar";
 import ProfileMidBody from "../components/ProfileMidBody";
 

@@ -1,9 +1,13 @@
 //import { jwtDecode } from "jwt-decode";
-//import { useEffect } from "react";
+
 import { Button, Col, Image, Nav, Row, Spinner } from "react-bootstrap";
 import ProfilePostCard from "./ProfilePostCard";
-import { useSelector } from "react-redux";
-//import { fetchPostByUser } from "../features/posts/postsSlice"
+import { useDispatch, useSelector } from "react-redux";
+import {useContext, useEffect} from "react"
+import { AuthContext } from "./AuthProvider"
+import { fetchPostByUser } from "../features/posts/postsSlice";
+
+
 
 export default function ProfileMidBody() {
  // const [posts, setPosts] = useState([]);
@@ -11,9 +15,16 @@ export default function ProfileMidBody() {
 
   const pic = "https://pbs.twimg.com/profile_images/1587405892437221376/h167Jlb2_400x400.jpg";
 
+
+
   const posts = useSelector(store =>  store.posts.posts)
   const loading = useSelector((store) => store.posts.loading)
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const { currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    dispatch(fetchPostByUser(currentUser.uid))
+  }, [dispatch, currentUser])
 
   // Fetch posts based on user id
   //const fetchPosts = (userId) => {
@@ -98,8 +109,8 @@ export default function ProfileMidBody() {
 
 
 
-      {posts.length > 0 && posts.map((post) => (
-        <ProfilePostCard key={post.id} content={post.content} postId={post.id}/>
+      {posts.map((post)=>(
+        <ProfilePostCard key={post.id} post={post}/>
       ))}
     </Col>
   )
